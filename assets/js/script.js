@@ -215,26 +215,36 @@ behavior: "smooth"
 // SCROLL REVEAL
 // ==========================
 
+/*
 const reveals = document.querySelectorAll("section");
 
-function revealSections(){
-
-reveals.forEach(section=>{
-
-const top = section.getBoundingClientRect().top;
-const windowHeight = window.innerHeight;
-
-if(top < windowHeight - 120){
-
-section.classList.add("active","reveal");
-
-}
-
-});
-
+function revealSections() {
+  ...
 }
 
 window.addEventListener("scroll", revealSections);
 
 revealSections();
+*/
+// Portfolio Lightbox
+const portfolioImages = document.querySelectorAll(".portfolio img");
 
+const lightbox = document.createElement("div");
+lightbox.className = "lightbox";
+
+const lightboxImg = document.createElement("img");
+
+lightbox.appendChild(lightboxImg);
+document.body.appendChild(lightbox);
+
+portfolioImages.forEach(img => {
+  img.addEventListener("click", () => {
+    lightbox.classList.add("active");
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+  });
+});
+
+lightbox.addEventListener("click", () => {
+  lightbox.classList.remove("active");
+});
